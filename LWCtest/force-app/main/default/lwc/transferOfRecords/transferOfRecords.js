@@ -63,7 +63,7 @@ export default class LWCWizard extends LightningElement {
         else if(this._selected == 'none' || this._selected == '' ){
             const evt = new ShowToastEvent({
                 title: 'Error',
-                message: 'At least one record object must be selected!',
+                message: 'At least one object record must be selected!',
                 variant: 'error',
                 mode: 'dismissable'
             });
