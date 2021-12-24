@@ -1,0 +1,30 @@
+<apex:page Controller="RecordsController" lightningStylesheets="true">
+    <apex:form>
+        <apex:pageMessages id="showm"></apex:pageMessages>
+        <apex:pageBlock title="Information">    
+        <apex:pageBlockSection  title="For Users" id="nik1" columns="2"> 
+                <apex:outputField value="{!fromUser.Name}"/>
+                <apex:outputField value="{!toUser.Name}"/>
+                <apex:outputField value="{!fromUser.IsActive}"/>
+                <apex:outputField value="{!toUser.IsActive}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="For Developers" id="nik2" columns="2"> 
+            <apex:outputField value="{!fromUser.Id}"/>
+            <apex:outputField value="{!toUser.Id}"/>
+            <apex:outputField value="{!order.fromUserId__c}"/>
+            <apex:outputField value="{!order.toUserId__c}"/>   
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+        <apex:pageBlock title="Types of records" >
+            <apex:pageBlockTable value="{!selectedOptions}" var="s">
+                <apex:column value="{!s.label}"/>
+            </apex:pageBlockTable>
+    
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton action="{! backSecond }" value="Back"/>
+            <apex:commandButton action="{! confirm }" value="Confirm"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>
