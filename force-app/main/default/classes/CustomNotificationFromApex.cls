@@ -1,6 +1,6 @@
 public without sharing class CustomNotificationFromApex {
 
-    public static void notifyUsers(Set<String> recipientsIds, String targetId, List<String> setObjects) {
+    public static void notifyUsers(Set<String> recipientsIds, String targetId, String nameOfObject) {
 
         // Get the Id for our custom notification type
         CustomNotificationType notificationType = 
@@ -13,7 +13,7 @@ public without sharing class CustomNotificationFromApex {
 
         // Set the contents for the notification
         notification.setTitle('Record Reassignment app');
-        notification.setBody('Congratulations! ' + setObjects + ' have been reassigned!');
+        notification.setBody('Congratulations! ' + nameOfObject +' have been reassigned!');
 
         // Set the notification type and target
         notification.setNotificationTypeId(notificationType.Id);

@@ -28,17 +28,20 @@ public with sharing class ReassigningRecords implements Database.Batchable<sObje
     /*
     @future
     public static void ReassigningRecords(String fromUserId, String toUserId, List<String> selectedOptions) {
+
          
         for(String so : selectedOptions){
             String query = 'SELECT Id ' + 
                            ' From '+ so +
                            ' WHERE OwnerId = \'' + fromUserId +'\'';
+
             List<sObject> recordList = Database.query(query);
             
                 for(sObject rec : recordList){
                     String getOwnerId = (String)rec.put('OwnerId', toUserId);
                     //String oldDesc = (String)acc.put('description', 'new desc');
                     //getOwnerId = toUserId;
+
                     //System.debug(rec);
                 }
                 
