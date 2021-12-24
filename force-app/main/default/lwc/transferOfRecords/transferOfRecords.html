@@ -1,7 +1,10 @@
 <template>
     <lightning-card>
         <div class="slds-align_absolute-center">
-<lightning-progress-indicator current-step={currentStep} type="base" variant="base" class="slds-size_xx-large" >
+<lightning-progress-indicator current-step={currentStep} 
+                              type="base" 
+                              variant="base"
+                              style="width:50%">
     <lightning-progress-step label="Selecting users" value="1" onclick={handleOnStepClick}></lightning-progress-step>
     <lightning-progress-step label="Selecting record types" value="2" onclick={handleOnStepClick}></lightning-progress-step>
     <lightning-progress-step label="Final" value="3" onclick={handleOnStepClick}></lightning-progress-step>
@@ -54,8 +57,23 @@
 </div>
 
 <template if:true={isStepThree}>
-<div style="height:33rem">
-</div>
+    <div class="slds-align_absolute-center slds-text-heading_large"
+         style="margin-top:4rem;">Pre result:</div>
+        <div class="slds-align_absolute-center slds-box slds-theme_shade slds-region_narrow " 
+             style="width:520px; height:10rem; margin-top:2rem; margin-bottom:6rem">
+        <dl class="slds-list_horizontal slds-wrap" >
+          <dt class="slds-dl_horizontal__label">From User:</dt>
+          <dd class="slds-dl_horizontal__detail"><strong>{fromUserName}</strong>, ({fromUserId})</dd>
+          <dt class="slds-dl_horizontal__label"></dt>
+          <dd class="slds-dl_horizontal__detail"></dd>
+          <dt class="slds-dl_horizontal__label">To User:</dt>
+          <dd class="slds-dl_horizontal__detail"><strong>{toUserName}</strong>, ({toUserId}) </dd>
+            <div style="margin-top:2rem;">
+                <dt class="slds-dl_horizontal__label" style="width:150px"> This type of records will be reassigned: </dt>
+                <dd class="slds-dl_horizontal__detail" style="width:150px" ><strong>{_selected}</strong></dd>
+            </div>
+        </dl>
+      </div>
 </template>
  
 <div align ="center">

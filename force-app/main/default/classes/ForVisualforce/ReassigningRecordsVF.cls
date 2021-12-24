@@ -1,4 +1,4 @@
-public with sharing class ReassigningRecords implements Database.Batchable<sObject> {
+public with sharing class ReassigningRecordsVF implements Database.Batchable<sObject> {
     
     public String email; 
     public String query;
@@ -25,6 +25,11 @@ public with sharing class ReassigningRecords implements Database.Batchable<sObje
     CustomNotificationFromApex.notifyUsers(rep, value, entity);
     }
 
+
+
+
+    // Future method
+    // --------------------------------------------------------------------------------------------------------
     /*
     @future
     public static void ReassigningRecords(String fromUserId, String toUserId, List<String> selectedOptions) {

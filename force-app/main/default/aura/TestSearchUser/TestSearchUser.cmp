@@ -1,0 +1,11 @@
+<aura:component controller="SearchForKeys" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" 
+                access="global"  > 
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    
+    <div class="slds-box slds-theme_default slds-align_absolute-center"> 
+        <c:ProgressIndicator />
+    </div>
+</aura:component>

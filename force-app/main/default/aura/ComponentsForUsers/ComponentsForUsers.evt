@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION">
+    <aura:attribute name="selectedNameUserFrom" type="String"/>
+    <aura:attribute name="selectedIdUserFrom" type="String"/>
+</aura:event>

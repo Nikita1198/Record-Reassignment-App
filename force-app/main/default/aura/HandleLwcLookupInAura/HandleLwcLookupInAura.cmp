@@ -1,0 +1,29 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" 
+                access="global" >  
+   <aura:attribute name="selectedRecordIdFrom" type="String" />  
+   <aura:attribute name="selectedRecordNameFrom" type="String" />  
+
+   <aura:attribute name="selectedRecordIdTo" type="String" />  
+   <aura:attribute name="selectedRecordNameTo" type="String" /> 
+   
+    <aura:registerEvent name="appsEvent" type="c:ComponentsForUsers"/>
+    <aura:registerEvent name="appsEventTo" type="c:ComponentsForUsersTo"/>
+    
+    
+    <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-align_absolute-center">
+        <div class="slds-size_1-of-3">  
+            From User:
+            <c:lwcLookup  objectApiName='User' 
+                          iconName='standard:user' 
+                          onrecordselection="{!c.onAccountSelectionFrom}"/>  
+        </div>  
+        <div class="slds-size_1-of-12"></div>
+          <div class="slds-size_1-of-3">  
+            To User:
+           <c:lwcLookup  objectApiName='User' 
+                         iconName='standard:user' 
+                         onrecordselection="{!c.onAccountSelectionTo}"/>  
+         </div> 
+    </div>
+   
+ </aura:component>  

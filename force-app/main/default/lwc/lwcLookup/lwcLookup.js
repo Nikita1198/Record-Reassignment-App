@@ -1,5 +1,5 @@
 import { LightningElement, track, wire, api } from "lwc";  
- import findRecords from "@salesforce/apex/LwcLookupController.findRecords";  
+ import findRecords from "@salesforce/apex/SampleAuraController.findRecords";  
  export default class LwcLookup extends LightningElement {  
   @track recordsList;  
   @track searchKey = "";  

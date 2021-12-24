@@ -181,7 +181,7 @@ global class RecordsController {
             for(SelectOption sel : selectedOptions){
                 setObjects.add(sel.getValue());
 
-                ReassigningRecords reassign  = new ReassigningRecords();
+                ReassigningRecordsVF reassign  = new ReassigningRecordsVF();
 
                 reassign.query = 'SELECT Id ' + 
                             ' From '+ sel.getValue() +
@@ -195,7 +195,7 @@ global class RecordsController {
                 Id batchInstanceId = Database.executeBatch(reassign);
             }
             //ReassigningRecords.ReassigningRecords(order.fromUserId__c, order.toUserId__c, setObjects);
-            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            /*Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
 
             mail.setToAddresses(new String[] {fromUser.email, toUser.email });
             mail.setReplyTo('batch@acme.com');
@@ -203,7 +203,7 @@ global class RecordsController {
             mail.setSubject('Record Reassignment app');
             mail.setPlainTextBody('From user ' + fromUser.Name + ' to user ' + toUser.Name + ', this types of records were reassigned: '+ setObjects +'.');
 
-            Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+            Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });*/
             
         }catch(DMLException e){
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Error!'));
