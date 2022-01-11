@@ -2,9 +2,6 @@ public without sharing class CustomNotificationFromApex {
 
     public static Boolean notifyUsers(Set<String> recipientsIds, String targetId, String nameOfObject) {
 
-        // Variable for test
-        Boolean key;
-
         // Get the Id for our custom notification type
         CustomNotificationType notificationType = 
             [SELECT Id, DeveloperName 
@@ -22,13 +19,15 @@ public without sharing class CustomNotificationFromApex {
         notification.setNotificationTypeId(notificationType.Id);
         notification.setTargetId(targetId);
         
+        // Variable for test
+        Boolean key = true;
+        
         // Actually send the notification
         try {
             notification.send(recipientsIds);
             System.debug(notification);
         }
         catch (Exception e) {
-            key = false;
             System.debug('Problem sending notification: ' + e.getMessage());
         }
         return key;

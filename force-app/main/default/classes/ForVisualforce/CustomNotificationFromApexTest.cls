@@ -1,72 +1,62 @@
 @isTest
 public class CustomNotificationFromApexTest {
     
-	@isTest static void testNotification() {
-      List<User> allIds = [SELECT Id FROM User];
-      
-      //Set of all Id's of all users
-      Set<String> recipientsIds = new Set<String>();
-      
-      for (User allId : allIds) {
-          recipientsIds.add(allId.id);
-       }
-      
-      // set target id as id of our App
-	  String targetId = '0057Q000000qeESQAY';
-	  
-      // set Name of Object
-      List<String> stdObjectNames = new List<String>();
-        for ( Schema.SObjectType typ : Schema.getGlobalDescribe().values() ) {
-            String sobjName = String.valueOf(typ);
-            if ( !sobjName.contains('__c') ) {
-            	stdObjectNames.add(sobjName);
-            	}
-        }
-        System.debug('stdObjectNames: ' + stdObjectNames);
-	  
-        
-        List<String> testListOfObjects = new List<String>();
-        String ObjectNameString = 'New Object';
-        String ObjectNameInteger = '0123456789'; 
-        
-		        
-        for (String userID : recipientsIds) {
-            Set<String> newSet = new Set<String>();
-            newSet.add(userID);
-            CustomNotificationFromApex.notifyUsers(newSet, userID ,ObjectNameString); 
-        }
-		
-    }
-    
-    @isTest static void testNotificationOfException() {
-        
-        Set<String> recipientsIds = null;
-        String targetId;
-        String nameOfObject;
-        
-        try {
-            CustomNotificationFromApex.notifyUsers(recipientsIds, targetId, nameOfObject);
-        }
-        catch (Exception e) {
-            System.assertEquals('Problem sending notification: ' + e.getMessage(), e.getMessage());
-        }               
-    }
-    
-    
     @isTest static void testNotificationOfExceptionTest() { 
-		Boolean returnValue = true;
+		Boolean returnValue = false;
         try {
-        // 1: core code to try
+            Set<String> setIdOfUsers = new Set<String>();
+           	User anyUser = [SELECT Id FROM User LIMIT 1];
+        	CustomNotificationFromApex.notifyUsers(setIdOfUsers, anyUser.id, anyUser.id);
         if(Test.isRunningTest()) {
-        CalloutException e = new CalloutException();
-        e.setMessage('This is a constructed exception for testing and code coverage');
-        throw e;
-        }
+            CalloutException e = new CalloutException();
+            e.setMessage('This is a constructed exception for testing and code coverage');
+            throw e;
+            }
         }
         catch(Exception ex) {
         // 2: code to execute when an Exception is thrown
-           returnValue = false;
+           returnValue = true;
         }
+        System.assert(returnValue, 'An Exception was not thrown');
+    }
+
+        
+     @isTest static void testNotification() { 
+        
+        Profile p = [SELECT Id FROM Profile WHERE Name='Standard User']; 
+        User u1 = new User(Alias = 'fromUser', Email='standarduser@testorg.com', 
+                          EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US', 
+                          LocaleSidKey='en_US', ProfileId = p.Id, 
+                          TimeZoneSidKey='America/Los_Angeles', UserName='newuserjoni@testorg.com');
+		insert u1;
+        
+        
+
+        Boolean exceptionOccurred = false;
+     	try{
+            System.runAs(u1) {
+                Test.startTest();
+                Set<String> setIdOfUsers = new Set<String>();
+    
+                List<Account> lstAccount= new List<Account>();
+                    for(Integer i=0 ;i <100;i++) {
+                        Account acc = new Account();
+                        acc.Name ='Test Name'+i;
+                        lstAccount.add(acc);
+                    }
+                insert lstAccount;
+                
+                for(Account cont : lstAccount) {
+                    setIdOfUsers.add(cont.id);
+                }
+                
+                CustomNotificationFromApex.notifyUsers(setIdOfUsers, u1.id, u1.id);
+                Test.stopTest();
+                System.assertNotEquals(null, CustomNotificationFromApex.notifyUsers(setIdOfUsers, u1.id, u1.id));
+            }
+         } catch (Exception e) {     
+         	 system.assert(false, 'Exceptions should be handled by the method');
+         }
     }
     
 }

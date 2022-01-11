@@ -1,4 +1,4 @@
-<apex:page Controller = "RecordsController" lightningStylesheets="true" >
+<apex:page Controller="RecordsController" lightningStylesheets="true" >
 
     <style>
         #spinner{
@@ -45,9 +45,9 @@
     <apex:pageBlock title="Search User" rendered="{!FirstBlock}">
 
         <apex:pageBlockSection >
-            <apex:inputField label = "From User" value="{!order.fromUserName__c}"  required ="true" />
-            <apex:inputField label = "To User" value="{!order.toUserName__c}" required="true"/>
-        </apex:pageBlockSection >
+            <apex:inputField label="From User" value="{!order.fromUserName__c}"  required="true" />
+            <apex:inputField label="To User" value="{!order.toUserName__c}" required="true"/>
+        </apex:pageBlockSection>
 
        <!-- <apex:pageBlockSection>
                 <apex:outputLabel value="From User" for="mgr"></apex:outputLabel>
@@ -91,7 +91,7 @@
                     <p>Available</p>
                     <apex:selectOptions value="{!unSelectedOptions}"/>
                 </apex:selectList>
-                <apex:panelGroup>
+                <apex:panelGroup >
                     <apex:commandButton value=">>" action="{!DoSelect}" 
                         reRender="selectionBlock"/>
                     <br/>
@@ -115,7 +115,7 @@
         </apex:pageBlock>
 
         <apex:pageBlock title="Information" rendered="{!ThirdBlock}">   
-            <apex:pageBlockSection  title="For Users" id="nik1" columns="2"> 
+            <apex:pageBlockSection title="For Users" id="nik1" columns="2"> 
                     <apex:outputField label="From User" value="{!fromUser.Name}"/>
                     <apex:outputField label="To User" value="{!toUser.Name}"/>
                     <apex:outputField value="{!fromUser.IsActive}"/>

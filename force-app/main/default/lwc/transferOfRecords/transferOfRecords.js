@@ -198,7 +198,4 @@ export default class LWCWizard extends LightningElement {
         this.dispatchEvent(evt);
     }
 
-}  
-
-
-
+}

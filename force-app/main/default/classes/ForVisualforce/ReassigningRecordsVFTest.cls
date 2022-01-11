@@ -15,7 +15,9 @@ public class ReassigningRecordsVFTest {
                            EmailEncodingKey='UTF-8', LastName='Testing_2', LanguageLocaleKey='en_US',
                            LocaleSidKey='en_US', ProfileId = p.Id,
                            TimeZoneSidKey='America/Los_Angeles', UserName='standarduseriron@testorg.com');
- 
+ 		insert u1;
+        insert u2;
+        
         List<String> listObj = new List<String>{
             		'Account',
              	   	'Contact',

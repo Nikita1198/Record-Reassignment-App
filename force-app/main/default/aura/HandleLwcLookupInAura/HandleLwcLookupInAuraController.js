@@ -9,4 +9,4 @@
         component.set("v.selectedRecordIdTo", event.getParam('selectedRecordId'));  
    }
 
-}) 
+})
