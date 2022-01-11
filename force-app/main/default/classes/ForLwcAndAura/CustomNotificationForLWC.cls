@@ -1,6 +1,7 @@
 public without sharing class CustomNotificationForLWC {
 
     public static void notifyUsers(Set<String> recipientsIds, String targetId, String nameOfObject, Integer numberOfRecords, Boolean key, String userName) {
+        
         // Get the Id for our custom notification type
         CustomNotificationType notificationType = 
             [SELECT Id, DeveloperName 
@@ -19,7 +20,7 @@ public without sharing class CustomNotificationForLWC {
             notification.setBody('Sorry! But there are no records in the ' + nameOfObject +' where owner is '+ userName + '.');
         }
 
-        // Set the notification type and target
+        // Set the notification type and target!
         notification.setNotificationTypeId(notificationType.Id);
         notification.setTargetId(targetId);
         

@@ -36,17 +36,6 @@ public class SampleAuraController {
         }catch(DMLException e){
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Error!'));
         }
-        /*
-        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-
-        mail.setToAddresses(new String[] {fromUser.email, toUser.email });
-        mail.setReplyTo('batch@acme.com');
-        mail.setSenderDisplayName('App notification');
-        mail.setSubject('Record Reassignment app');
-        mail.setPlainTextBody('From user ' + fromUser.Name + ' to user ' + toUser.Name + ', this types of records were reassigned: '+ recordType +'.');
-
-        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
-        */
     }
 
     @AuraEnabled(cacheable=true)

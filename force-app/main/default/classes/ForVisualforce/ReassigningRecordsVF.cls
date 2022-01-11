@@ -1,4 +1,4 @@
-public with sharing class ReassigningRecordsVF implements Database.Batchable<sObject> {
+public with sharing class ReassigningRecordsVF implements Database.Batchable<sObject>, Database.stateful {
     
     public String email; 
     public String query;
@@ -21,8 +21,10 @@ public with sharing class ReassigningRecordsVF implements Database.Batchable<sOb
    }
    public void finish(Database.BatchableContext BC){
 
-    Set<String> rep = new Set<String>{fromUserId, value};
-    CustomNotificationFromApex.notifyUsers(rep, value, entity);
+        Set<String> rep = new Set<String>{fromUserId, value};
+        if (!Test.isRunningTest()) {
+            CustomNotificationFromApex.notifyUsers(rep, value, entity);
+        }
     }
 
 
