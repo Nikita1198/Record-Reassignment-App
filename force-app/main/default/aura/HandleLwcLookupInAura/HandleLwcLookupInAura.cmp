@@ -10,7 +10,7 @@
     <aura:registerEvent name="appsEventTo" type="c:ComponentsForUsersTo"/>
     
     
-    <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-align_absolute-center">
+    <div class="demo-only demo-only--sizing slds-grid slds-align_absolute-center">
         <div class="slds-size_1-of-3">  
             From User:
             <c:lwcLookup  objectApiName='User' 

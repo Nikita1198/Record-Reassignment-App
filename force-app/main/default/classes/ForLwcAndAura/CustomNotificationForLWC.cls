@@ -1,6 +1,6 @@
 public without sharing class CustomNotificationForLWC {
 
-    public static void notifyUsers(Set<String> recipientsIds, String targetId, String nameOfObject, Integer numberOfRecords, Boolean key, String userName) {
+    public static Boolean notifyUsers(Set<String> recipientsIds, String targetId, String nameOfObject, Integer numberOfRecords, Boolean key, String userName) {
         
         // Get the Id for our custom notification type
         CustomNotificationType notificationType = 
@@ -20,6 +20,8 @@ public without sharing class CustomNotificationForLWC {
             notification.setBody('Sorry! But there are no records in the ' + nameOfObject +' where owner is '+ userName + '.');
         }
 
+        Boolean keyObj = true;
+
         // Set the notification type and target!
         notification.setNotificationTypeId(notificationType.Id);
         notification.setTargetId(targetId);
@@ -29,7 +31,9 @@ public without sharing class CustomNotificationForLWC {
             notification.send(recipientsIds);
         }
         catch (Exception e) {
+            key = false;
             System.debug('Problem sending notification: ' + e.getMessage());
         }
+        return keyObj;
     }
 }

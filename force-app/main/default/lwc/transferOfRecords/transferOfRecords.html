@@ -12,30 +12,28 @@
 </div>
 <template if:true={isStepOne}>
     <div style="height:4.8em"></div>
-        <div class="slds-grid slds-wrap slds-align_absolute-center slds-size_xxx-large" >
-            <div class="slds-size_1-of-6"> 
-                <c-lwc-lookup 
-                lookup-label="From User" 
-                object-api-name="user" 
-                icon-name="standard:user"  
-                onrecordselection={onFromUserSelection}>
-                </c-lwc-lookup>
+        <div class="slds-grid slds-wrap slds-align_absolute-center">
+            <div class="slds-size_1-of-5"> 
+                <c-lookup onsearch={handleSearch} 
+                          label="From User" 
+                          placeholder="Search User.." 
+                          onselectionchange={handleSelectionChangeFrom}>
+                </c-lookup>
             </div>
             <div class="slds-size_xx-small"></div>
-            <div class="slds-size_1-of-6">  
-                <c-lwc-lookup 
-                lookup-label="To User" 
-                object-api-name="user" 
-                icon-name="standard:user"  
-                onrecordselection={onToUserSelection}>
-                </c-lwc-lookup>
+            <div class="slds-size_1-of-5">  
+                <c-lookup onsearch={handleSearch} 
+                          label="To User" 
+                          placeholder="Search User.." 
+                          onselectionchange={handleSelectionChangeTo}>
+                </c-lookup>
             </div>
     </div>
 
  <div style="height:32em"></div>
 </template>
 
-<div class="slds-card__body slds-p-around_medium">
+<div class="slds-card__body slds-var-p-around_medium">
 <template if:true={isStepTwo}>
     <div class="slds-align_absolute-center">
     <lightning-dual-listbox 
@@ -57,22 +55,35 @@
 </div>
 
 <template if:true={isStepThree}>
-    <div class="slds-align_absolute-center slds-text-heading_large"
-         style="margin-top:4rem;">Pre result:</div>
-        <div class="slds-align_absolute-center slds-box slds-theme_shade slds-region_narrow " 
-             style="width:520px; height:10rem; margin-top:2rem; margin-bottom:6rem">
-        <dl class="slds-list_horizontal slds-wrap" >
-          <dt class="slds-dl_horizontal__label">From User:</dt>
-          <dd class="slds-dl_horizontal__detail"><strong>{fromUserName}</strong>, ({fromUserId})</dd>
-          <dt class="slds-dl_horizontal__label"></dt>
-          <dd class="slds-dl_horizontal__detail"></dd>
-          <dt class="slds-dl_horizontal__label">To User:</dt>
-          <dd class="slds-dl_horizontal__detail"><strong>{toUserName}</strong>, ({toUserId}) </dd>
-            <div style="margin-top:2rem;">
-                <dt class="slds-dl_horizontal__label" style="width:150px"> This type of records will be reassigned: </dt>
-                <dd class="slds-dl_horizontal__detail" style="width:150px" ><strong>{_selected}</strong></dd>
+    <div class="slds-grid slds-grid_vertical slds-box slds-m-around_xx-large slds-theme_shade">
+        <div class="slds-col slds-m-around_small slds-theme_default">
+            <div class="slds-box">
+                <dl class="slds-dl_inline">
+                    <dt class="slds-dl_inline__label">From User:</dt>
+                    <dd class="slds-dl_inline__detail"><strong>{fromUserName}</strong>, ({fromUserId})</dd>
+                    <dt class="slds-dl_inline__label">To User:</dt>
+                    <dd class="slds-dl_inline__detail"><strong>{toUserName}</strong>, ({toUserId}) </dd>
+                  </dl>
             </div>
-        </dl>
+        </div>
+        <div class="slds-col slds-box slds-m-around_small slds-theme_default" >
+            <p class='slds-m-bottom_medium'>This type of records will be reassigned:</p>
+            <div class="slds-grid slds-wrap">
+                <template for:each={_selected} for:item="acc">
+                    <span key={acc.id}>
+                      <div class="slds-col slds-size_3-of-12">
+                       <lightning-badge class="slds-m-bottom_xx-small slds-m-right_xx-small" label={acc}></lightning-badge> &nbsp;
+                      </div>
+                    </span>
+                   </template>
+                </div>
+            </div>
+        <div class="slds-col slds-m-around_small slds-theme_default">
+            <div class="slds-box">
+                <p>After clicking the "<strong>Finish</strong>" button, you will be redirected to the home tab.</p>
+                <p> When the operation is completed, you will receive a notification on the website and by email.</p> 
+            </div>
+        </div>
       </div>
 </template>
  
@@ -80,19 +91,19 @@
 <template if:true={isEnablePrev}>
     <lightning-button label="Back" 
                       variant="destructive-text" 
-                      class="slds-m-left_x-small"
+                      class="slds-var-m-left_x-small"
                       onclick={handlePrev} ></lightning-button>
 </template>
 <template if:true={isEnableNext}>
     <lightning-button label="Next" 
-                      class="slds-m-left_x-small"
+                      class="slds-var-m-left_x-small"
                       variant="brand-outline" 
                       onclick={handleNext} ></lightning-button>
 </template>
 <template if:true={isEnableFinish}>
     <lightning-button label="Finish" 
                       variant="brand-outline"
-                      class="slds-m-left_x-small"
+                      class="slds-var-m-left_x-small"
                       onclick={handleFinish} ></lightning-button>
 </template>
 </div>

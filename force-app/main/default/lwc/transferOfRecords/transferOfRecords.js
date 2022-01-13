@@ -2,6 +2,7 @@ import { wire, api, LightningElement, track} from 'lwc';
 import updateRecord from '@salesforce/apex/SampleAuraController.getPiklistValues';
 import takeRecord from '@salesforce/apex/SampleAuraController.getValues';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import apexSearch from '@salesforce/apex/SampleLookupController.search';
 
 
 const DELAY = 350;
@@ -51,7 +52,6 @@ export default class LWCWizard extends LightningElement {
                 takeRecord({
                     fromUserId: this.fromUserId,
                 }).then(result => {
-
                     if (result) {
                         const items = [];
                         for (let i = 1; i <= result.length; i++) {
@@ -61,6 +61,7 @@ export default class LWCWizard extends LightningElement {
                             });
                         }
                         this.options.push(...items);
+                        console.log(items);
                         console.log('Stop');
                         this.currentStep = "2";
                     } else {
@@ -99,11 +100,13 @@ export default class LWCWizard extends LightningElement {
     handlePrev(){
         if(this.currentStep == "3"){
             this.currentStep = "2";
+            this._selected = [];
         }
         else if(this.currentStep = "2"){
             this.currentStep = "1";
+            this._selected = [];
         }
-        this.values =  this._selected;
+        ;
     }
 
 
@@ -167,17 +170,6 @@ export default class LWCWizard extends LightningElement {
 @track toUserId;  
 @track fromUserId; 
 
-   onFromUserSelection(event){  
-   this.fromUserName = event.detail.selectedValue;  
-   this.fromUserId = event.detail.selectedRecordId;  
-   }  
-  
-   onToUserSelection(event){  
-   this.toUserName = event.detail.selectedValue;  
-   this.toUserId = event.detail.selectedRecordId;  
-   }  
-
-
    //ERRORS
    showErrorToast() {
     const evt = new ShowToastEvent({
@@ -197,5 +189,31 @@ export default class LWCWizard extends LightningElement {
         });
         this.dispatchEvent(evt);
     }
+
+    // Lookup from Sergey
+    handleSearch(event) {
+        const lookupElement = event.target;
+        apexSearch(event.detail)
+            .then(results => {
+                lookupElement.setSearchResults(results);
+            })
+            .catch(error => {
+                // TODO: handle error
+            });
+    }
+
+    handleSelectionChangeFrom(event) {
+        const selection = event.target.getSelection()[0];
+        this.fromUserId = selection.id;
+        this.fromUserName = selection.title;
+        console.log(selection);
+    }    
+
+    handleSelectionChangeTo(event) {
+        const selection = event.target.getSelection()[0];
+        this.toUserId = selection.id;
+        this.toUserName = selection.title;
+        console.log(selection);
+    }    
 
 }

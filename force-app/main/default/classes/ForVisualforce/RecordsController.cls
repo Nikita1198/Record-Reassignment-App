@@ -8,8 +8,6 @@ global class RecordsController {
     public User toUser{get; set;}
     global Order__c order {get; set;}
 
-   // private ApexPages.StandardSetController controller;
-    //private PageReference savePage;
     private Set<String> unSelectedNames = new Set<String>();
     public Set<String> selectedNames = new Set<String>();
     private Set<String> finall = new Set<String>();
@@ -112,25 +110,6 @@ global class RecordsController {
             SecondBlock = false;
         }
     }
-
-   /* 
-    private final User use; //User sobject
-	
-	//initializes the private member variable u by using the getRecord method from the standard controller
-	public RecordsController(ApexPages.StandardController stdController) {
-		this.use = (User)stdController.getRecord();
-	}
-	
-	//builds a picklist of user names based on their profile
-	public List<selectOption> getMgrs() {
-		List<selectOption> options = new List<selectOption>(); //new list for holding all of the picklist options
-		options.add(new selectOption('', '- None -')); //add the first option of '- None -' in case the user doesn't want to select a value or in case no values are returned from query below
-		for (User users : [SELECT Id, Name FROM User Where IsActive = true ]) { //query for User records with IsActive
-			options.add(new selectOption(users.Id, users.Name)); //for all records found - add them to the picklist options
-		}
-		return options; //return the picklist options
-	}*/
- 
 
     public List<SelectOption> selectedOptions { 
         get {

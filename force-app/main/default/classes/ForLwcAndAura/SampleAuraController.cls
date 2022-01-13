@@ -77,6 +77,7 @@ public class SampleAuraController {
                         List<sObject> recordList = Database.query(query);
     
                         if(recordList!=null && !recordList.isEmpty()){
+                            System.debug(ty);
                             options.add(ty);
                         }
                     }
@@ -87,4 +88,5 @@ public class SampleAuraController {
         }
             return options; 
     }
+    
 }

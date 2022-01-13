@@ -25,7 +25,7 @@
 
     <lightning:notificationsLibrary aura:id="notifLib"/>
 
-    <div class="slds-m-around_medium">
+    <div class="slds-var-m-around_medium">
          
         <lightning:progressIndicator currentStep="{!v.selectedStep}" type="base">
             <lightning:progressStep label="Step One" value="step1" onclick="{!c.selectStep1}"/>
@@ -33,7 +33,7 @@
             <lightning:progressStep label="Step Three" value="step3" onclick="{!c.selectStep3}"/>
         </lightning:progressIndicator>
          
-        <div class="slds-p-around_xx-large">
+        <div class="slds-var-p-around_xx-large">
             <div class="{!v.selectedStep == 'step1' ? 'slds-show' : 'slds-hide'}">
                 <p><c:HandleLwcLookupInAura/></p>
             </div>

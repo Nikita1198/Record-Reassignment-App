@@ -1,34 +1,13 @@
 @isTest
 public class CustomNotificationForLWCTest {
     
-	@isTest static void testNotification() {
-        CustomNotificationForLWC notification = new CustomNotificationForLWC();
-        
-        
-    }
-    
-    @isTest static void testNotificationOfException() {
-        
-        Set<String> recipientsIds = null;
-        String targetId = null;
-        String nameOfObject = null;
-        Integer numberOfRecords = null;
-        Boolean key;
-        String userName = null; 
-        
-        try {
-            CustomNotificationForLWC.notifyUsers(recipientsIds, targetId, nameOfObject, numberOfRecords, key, userName);
-        }
-        catch (Exception e) {
-            System.assertEquals('Problem sending notification: ' + e.getMessage(), e.getMessage());
-        }               
-    }
-    
-    
     @isTest static void testNotificationOfExceptionTest() { 
-		Boolean returnValue = true;
+		Boolean returnValue = false;
         try {
-        // 1: core code to try
+            Set<String> setIdOfUsers = new Set<String>();
+            Integer numberOfRecords;
+           	User anyUser = [SELECT Id, Name FROM User LIMIT 1];
+            CustomNotificationForLWC.notifyUsers(setIdOfUsers, anyUser.id, anyUser.id, numberOfRecords, returnValue, anyUser.Name);
         if(Test.isRunningTest()) {
             CalloutException e = new CalloutException();
             e.setMessage('This is a constructed exception for testing and code coverage');
@@ -37,8 +16,9 @@ public class CustomNotificationForLWCTest {
         }
         catch(Exception ex) {
         // 2: code to execute when an Exception is thrown
-           returnValue = false;
+           returnValue = true;
         }
+        System.assert(returnValue, 'An Exception was not thrown');
     }
 
 }
